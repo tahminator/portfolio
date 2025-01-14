@@ -1,5 +1,5 @@
 // TODO - Please rewrite this software :(
 
 export async function GET() {
-  return Response.json({ version: "1.1" }, { status: 200 });
+  return Response.json({ version: "2.0" }, { status: 200 });
 }
