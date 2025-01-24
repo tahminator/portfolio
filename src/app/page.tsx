@@ -77,8 +77,8 @@ export default function Home() {
               <Resume />
             </div>
             <div className="space-x-4">
-              <LinkedIn url={"/linkedin"} name={"/in/tahmidahmed-"} />
-              <GitHub url={"https://github.com/0pengu"} name={"0pengu"} />
+              <LinkedIn url={"/linkedin"} name={"/in/thmd"} />
+              <GitHub url={"https://github.com/tahminator"} name={"0pengu"} />
               <Email
                 url={"mailto:tahmid@midhat.io"}
                 email={"tahmid@midhat.io"}
