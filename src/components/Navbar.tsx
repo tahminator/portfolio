@@ -59,7 +59,7 @@ export function Navbar() {
             Home
           </motion.a>
           <motion.a
-            href="#projects"
+            href="https://github.com/tahminator"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
@@ -70,11 +70,6 @@ export function Navbar() {
             className={`p-4 ${
               path === "/projects" ? "text-purple-400" : "text-white"
             } hover:drop-shadow-2xl`}
-            onClick={(e) => {
-              e.preventDefault();
-              setPath("/projects");
-              setProgrammatic(true);
-            }}
           >
             Projects
           </motion.a>

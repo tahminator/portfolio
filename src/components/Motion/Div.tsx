@@ -5,6 +5,6 @@ import { ComponentProps } from "react";
 
 type DivProps = ComponentProps<typeof motion.div>;
 
-export function HOne(props: DivProps) {
+export function Div(props: DivProps) {
   return <motion.div {...props}>{props.children}</motion.div>;
 }
