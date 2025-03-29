@@ -43,7 +43,6 @@ export default function Home() {
               <Typewriter steps={titles} />
             </div>
             <br />
-            {/* TODO - Could use Framer to animate buttons */}
             <Div
               className="space-x-4"
               initial={{ opacity: 0, scale: 0.5 }}
@@ -70,6 +69,13 @@ export default function Home() {
           </div>
         </div>
       </AnimatedBeam>
+      <div
+        id="projects"
+        className="w-screen h-screen flex flex-col items-center"
+      >
+        hi
+      </div>
+      <div className="w-screen h-screen flex flex-col items-center">hi</div>
     </>
   );
 }

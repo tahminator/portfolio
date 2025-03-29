@@ -43,11 +43,11 @@ export function Navbar() {
               ease: [0, 0.71, 0.2, 1.01],
             }}
             className={`p-4 ${
-              router.path === "home" ? "text-purple-400" : "text-white"
+              router.path === "/" ? "text-purple-400" : "text-white"
             } hover:drop-shadow-2xl`}
             onClick={(e) => {
               e.preventDefault();
-              router.goto("home");
+              router.goto("/");
             }}
           >
             Home
@@ -62,11 +62,11 @@ export function Navbar() {
               ease: [0, 0.71, 0.2, 1.01],
             }}
             className={`p-4 ${
-              router.path === "projects" ? "text-purple-400" : "text-white"
+              router.path === "/projects" ? "text-purple-400" : "text-white"
             } hover:drop-shadow-2xl`}
             onClick={(e) => {
               e.preventDefault();
-              router.goto("projects");
+              router.goto("/projects");
             }}
           >
             Projects
