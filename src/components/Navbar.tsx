@@ -10,10 +10,10 @@ import {
   useTransform,
   useVelocity,
 } from "framer-motion";
+import { useRouter } from "@/lib/hooks/useRouter";
 
 export function Navbar() {
-  const path = usePathStore((state) => state.path);
-  const setPath = usePathStore((state) => state.setPath);
+  const router = useRouter();
 
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -26,11 +26,6 @@ export function Navbar() {
     restDelta: 0.001,
   });
 
-  const [programmatic, setProgrammatic] = useProgrammaticStore((state) => [
-    state.programmatic,
-    state.setProgrammatic,
-  ]);
-
   return (
     <>
       <motion.nav
@@ -39,7 +34,7 @@ export function Navbar() {
       >
         <div className="flex items-center justify-between h-16 mx-3 space-x-4">
           <motion.a
-            href="#"
+            href="/"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
@@ -48,18 +43,17 @@ export function Navbar() {
               ease: [0, 0.71, 0.2, 1.01],
             }}
             className={`p-4 ${
-              path === "/" ? "text-purple-400" : "text-white"
+              router.path === "home" ? "text-purple-400" : "text-white"
             } hover:drop-shadow-2xl`}
             onClick={(e) => {
               e.preventDefault();
-              setPath("/");
-              setProgrammatic(true);
+              router.goto("home");
             }}
           >
             Home
           </motion.a>
           <motion.a
-            href="https://github.com/tahminator"
+            href="/project"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
@@ -68,8 +62,12 @@ export function Navbar() {
               ease: [0, 0.71, 0.2, 1.01],
             }}
             className={`p-4 ${
-              path === "/projects" ? "text-purple-400" : "text-white"
+              router.path === "projects" ? "text-purple-400" : "text-white"
             } hover:drop-shadow-2xl`}
+            onClick={(e) => {
+              e.preventDefault();
+              router.goto("projects");
+            }}
           >
             Projects
           </motion.a>

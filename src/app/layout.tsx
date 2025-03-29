@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { DownArrow } from "@/components/DownArrow/DownArrow";
 
 const rubik = Inter({
   subsets: ["latin"],
@@ -53,6 +54,7 @@ export default function RootLayout({
           <Navbar />
           {children}
         </div>
+        <DownArrow />
         <SpeedInsights />
       </body>
     </html>

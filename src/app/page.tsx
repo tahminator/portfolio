@@ -6,25 +6,24 @@ import { HOne } from "@/components/Motion/HOne";
 
 import AnimatedBeam from "@/components/Background/Background";
 import { Div } from "@/components/Motion/Div";
+import Typewriter from "@/components/Typewriter/Typewriter";
+
+const titles = [
+  "",
+  1500,
+  "develop unique software",
+  800,
+  "solve hard problems",
+  800,
+  "learn new things",
+  800,
+];
 
 export default function Home() {
-  // const titles = [
-  //   "",
-  //   1500,
-  //   "create fullstack apps",
-  //   1500,
-  //   "break fullstack apps",
-  //   300,
-  //   "solve hard problems",
-  //   1500,
-  //   "learn new things",
-  //   1500,
-  // ];
-
   return (
     <>
       <AnimatedBeam>
-        <div className="h-full w-full" id="top">
+        <div className="h-full w-full" id="home">
           <div className="title-body relative flex flex-col items-center justify-center h-full">
             <HOne
               className="text-3xl md:text-7xl lg:text-8xl"
@@ -39,10 +38,10 @@ export default function Home() {
               Hi, I'm <Magic name={"Tahmid Ahmed"} />
             </HOne>
             <br />
-            {/* <div className="flex items-center text-xl md:text-2xl lg:text-4xl"> */}
-            {/*   <div className="mr-2">I like to</div> */}
-            {/*   <Typewriter steps={titles} /> */}
-            {/* </div> */}
+            <div className="flex items-center text-xl md:text-2xl lg:text-4xl">
+              <div className="mr-2">I like to</div>
+              <Typewriter steps={titles} />
+            </div>
             <br />
             {/* TODO - Could use Framer to animate buttons */}
             <Div
