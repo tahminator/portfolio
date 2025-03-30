@@ -22,5 +22,5 @@ export default function Video(props: VideoProps) {
     }
   }, [isInView]);
 
-  return <video ref={ref} {...props} />;
+  return <video playsInline muted controls ref={ref} {...props} />;
 }
