@@ -25,19 +25,19 @@ const projects: Project[] = [
           internship search!
         </p>
         <p className="text-left">
-          Codebloom is a website that "game-ifies" LeetCode that gives you
-          points for solving problems and lets you compete against your friends
-          in a lower-stakes leaderboard system.
+          Codebloom is a website that "game-ifies" LeetCode by giving you points
+          for solving problems on a global leaderboard lets you compete against
+          your friends in a lower-stakes leaderboard system.
         </p>
         <p className="text-left">
           We had a lot of fun building this out because of all the challenges we
-          faced. A good example was trying to figure out how to reverse reverse
-          LeetCode GraphQL queries! Once we did, we then had to figure out how
-          to access some of the data that were locked behind protected GraphQL
-          queries (things like runtime, code, and more).
+          faced. A good example was trying to figure out how to reverse LeetCode
+          GraphQL queries! Once we did, we then had to figure out how to access
+          some of the data that were locked behind protected GraphQL queries
+          (things like runtime, code, and more).
         </p>
         <p className="text-left">
-          We're really proud of our project and we hope that people find this
+          We're really proud of the project and we hope that people find this
           just useful as we did! Anyone is free to join, so use the links below
           to view the website, as well as the GitHub repo if you would like to
           see the code!
@@ -115,7 +115,7 @@ const projects: Project[] = [
           The program has seen many iterations from a basic desktop GUI written
           Python and TKInter to a fully-fledged web application written in
           Next.js. The program has been used to send countless messages since
-          its inception, and has helped the company meet the goal of sending
+          its inception and has helped the company meet the goal of sending
           consistent messages en masse.
         </p>
       </>
