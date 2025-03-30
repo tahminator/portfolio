@@ -3,3 +3,5 @@ node_modules/
 .swc/
 .*.env
 .vercel
+
+.DS_Store

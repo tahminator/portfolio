@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Rubik } from "next/font/google";
 import "./globals.css";
+import AnimatedBeam from "@/components/Background/Background";
 import { Navbar } from "@/components/Navbar";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { BiDownArrow } from "react-icons/bi";
+import { FaCaretDown, FaDownLong, FaUpDown } from "react-icons/fa6";
+import { Button } from "@/components/ui/button";
 import { DownArrow } from "@/components/DownArrow/DownArrow";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const rubik = Inter({
   subsets: ["latin"],
@@ -53,8 +57,8 @@ export default function RootLayout({
         <div className="h-max">
           <Navbar />
           {children}
+          <DownArrow />
         </div>
-        <DownArrow />
         <SpeedInsights />
       </body>
     </html>

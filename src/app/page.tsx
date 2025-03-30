@@ -7,6 +7,7 @@ import { HOne } from "@/components/Motion/HOne";
 import AnimatedBeam from "@/components/Background/Background";
 import { Div } from "@/components/Motion/Div";
 import Typewriter from "@/components/Typewriter/Typewriter";
+import Project from "@/app/_components/Projects";
 
 const titles = [
   "",
@@ -69,13 +70,7 @@ export default function Home() {
           </div>
         </div>
       </AnimatedBeam>
-      <div
-        id="projects"
-        className="w-screen h-screen flex flex-col items-center"
-      >
-        hi
-      </div>
-      <div className="w-screen h-screen flex flex-col items-center">hi</div>
+      <Project />
     </>
   );
 }

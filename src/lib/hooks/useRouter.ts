@@ -21,7 +21,7 @@ export const useRouter = () => {
   const [route, setRoute] = useState<Routes>("/");
 
   // This ref is used to prevent hopping when scrolling even though the route itself will change.
-  const manualScrollRef = useRef(false);
+  const manualScrollRef = useRef(true);
 
   const goto = useCallback((route: Routes) => {
     manualScrollRef.current = false;

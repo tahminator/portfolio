@@ -33,8 +33,7 @@ export function Navbar() {
         style={{ y: yTransform }}
       >
         <div className="flex items-center justify-between h-16 mx-3 space-x-4">
-          <motion.a
-            href="/"
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
@@ -44,16 +43,15 @@ export function Navbar() {
             }}
             className={`p-4 ${
               router.path === "/" ? "text-purple-400" : "text-white"
-            } hover:drop-shadow-2xl`}
+            } hover:drop-shadow-2xl cursor-pointer`}
             onClick={(e) => {
               e.preventDefault();
               router.goto("/");
             }}
           >
             Home
-          </motion.a>
-          <motion.a
-            href="/project"
+          </motion.div>
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
@@ -63,14 +61,14 @@ export function Navbar() {
             }}
             className={`p-4 ${
               router.path === "/projects" ? "text-purple-400" : "text-white"
-            } hover:drop-shadow-2xl`}
+            } hover:drop-shadow-2xl cursor-pointer`}
             onClick={(e) => {
               e.preventDefault();
               router.goto("/projects");
             }}
           >
             Projects
-          </motion.a>
+          </motion.div>
         </div>
         <Progress className="rounded-full" />
       </motion.nav>
