@@ -1,3 +1,3 @@
-## Midhat.io
+## tahmid.io
 
 Personal portfolio
