@@ -11,6 +11,7 @@ import {
   useVelocity,
 } from "framer-motion";
 import { useRouter } from "@/lib/hooks/useRouter";
+import { clamp } from "@/lib/clamp";
 
 export function Navbar() {
   const router = useRouter();
@@ -18,7 +19,9 @@ export function Navbar() {
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
 
-  const scaledVelocity = useTransform(scrollVelocity, (v) => v / 10);
+  const scaledVelocity = useTransform(scrollVelocity, (v) =>
+    clamp(v, -200, 200),
+  );
 
   const yTransform = useSpring(scaledVelocity, {
     stiffness: 20,
