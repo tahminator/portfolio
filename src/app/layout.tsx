@@ -8,6 +8,7 @@ import { FaCaretDown, FaDownLong, FaUpDown } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import { DownArrow } from "@/components/DownArrow/DownArrow";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 const rubik = Inter({
   subsets: ["latin"],
@@ -57,6 +58,7 @@ export default function RootLayout({
         <div className="h-max">
           <Navbar />
           {children}
+          <Analytics />
           <DownArrow />
         </div>
         <SpeedInsights />
