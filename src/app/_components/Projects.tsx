@@ -15,7 +15,7 @@ type Project = {
 const projects: Project[] = [
   {
     name: "Codebloom",
-    video: "/codebloom.mp4",
+    video: "/codebloom_1.5x.mp4",
     description: (
       <>
         <p className="text-left">
@@ -67,7 +67,7 @@ const projects: Project[] = [
   },
   {
     name: "Project PENCIL",
-    video: "/pencil.mp4",
+    video: "/pencil_1.5x.mp4",
     description: (
       <div className="text-left">
         When I was working at Synergy Prep, I built a webapp that would help us
@@ -90,7 +90,7 @@ const projects: Project[] = [
   },
   {
     name: "GradeAlert",
-    video: "/gradealert.mp4",
+    video: "/gradealert_1.5x.mp4",
     caption: (
       <figcaption>
         The video contains mock data due to the fact that production contains
@@ -123,7 +123,7 @@ const projects: Project[] = [
   },
   {
     name: "Instalock",
-    video: "/instalock.mp4",
+    video: "/instalock_1.5x.mp4",
     description: (
       <>
         <p className="text-left">
@@ -175,7 +175,7 @@ const projects: Project[] = [
   },
   {
     name: "Odyssey",
-    video: "/odyssey.mp4",
+    video: "/odyssey_1.5x.mp4",
     description: (
       <>
         <p className="text-left">
@@ -261,8 +261,8 @@ export default function Project() {
             {description}
             {links && (
               <div className="flex flex-row">
-                {links.map((link) => (
-                  <Fragment key={key}>{link}</Fragment>
+                {links.map((link, k) => (
+                  <Fragment key={k}>{link}</Fragment>
                 ))}
               </div>
             )}
