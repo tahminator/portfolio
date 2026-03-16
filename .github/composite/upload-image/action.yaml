@@ -16,6 +16,4 @@ runs:
   steps:
     - name: Build and push image
       shell: bash
-      run: bun run .github/scripts/src/build-image \
-        --tagPrefix="${{ inputs.TAG_PREFIX }}" \
-        --dockerUpload="${{ inputs.DOCKER_UPLOAD }}"
+      run: bun run .github/scripts/src/build-image --tagPrefix="${{ inputs.TAG_PREFIX }}" --dockerUpload="${{ inputs.DOCKER_UPLOAD }}"
