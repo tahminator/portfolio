@@ -1,17 +1,11 @@
+import { DockerClient, Utils } from "@tahminator/pipeline";
 import { $ } from "bun";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 
-import { getEnvVariables } from "@/utils/load-env";
-
 process.env.TZ = "America/New_York";
 
-const { tagPrefix, dockerUpload } = await yargs(hideBin(process.argv))
-  .option("tagPrefix", {
-    type: "string",
-    default: "",
-    demandOption: false,
-  })
+const { dockerUpload } = await yargs(hideBin(process.argv))
   .option("dockerUpload", {
     type: "boolean",
     default: true,
@@ -21,8 +15,13 @@ const { tagPrefix, dockerUpload } = await yargs(hideBin(process.argv))
   .parse();
 
 async function main() {
-  const ciEnv = await getEnvVariables(["ci"]);
+  const ciEnv = await Utils.getEnvVariables(["ci"]);
   const { dockerHubPat } = parseCiEnv(ciEnv);
+
+  await using dockerClient = await DockerClient.create(
+    "tahminator",
+    dockerHubPat,
+  );
 
   // copy old tz format from build-image.sh
   const timestamp = new Date()
@@ -40,40 +39,13 @@ async function main() {
 
   const gitSha = (await $`git rev-parse --short HEAD`.text()).trim();
 
-  const tags = [
-    `tahminator/portfolio:${tagPrefix}latest`,
-    `tahminator/portfolio:${tagPrefix}${timestamp}`,
-    `tahminator/portfolio:${tagPrefix}${gitSha}`,
-  ];
-
-  console.log("Building image with following tags:");
-  tags.forEach((tag) => console.log(tag));
-
-  if (dockerHubPat) {
-    console.log("DOCKER_HUB_PAT found");
-  } else {
-    console.log("DOCKER_HUB_PAT missing or empty");
-  }
-
-  await $`echo ${dockerHubPat} | docker login -u tahminator --password-stdin`;
-
-  try {
-    await $`docker buildx create --use --name portfolio-builder`;
-  } catch {
-    await $`docker buildx use portfolio-builder`;
-  }
-
-  const buildMode = dockerUpload ? "--push" : "--load";
-
-  const tagArgs = tags.flatMap((tag) => ["--tag", tag]);
-
-  await $`docker buildx build ${buildMode} \
-              --platform linux/amd64 \
-              --file Dockerfile \
-              ${tagArgs} \
-              .`;
-
-  console.log("Image pushed successfully.");
+  await dockerClient.buildImage({
+    dockerFileLocation: "Dockerfile",
+    dockerUsername: "tahminator",
+    dockerRepository: "portfolio",
+    tags: [timestamp, gitSha],
+    shouldUpload: dockerUpload,
+  });
 }
 
 function parseCiEnv(ciEnv: Record<string, string>) {

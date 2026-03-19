@@ -1,0 +1,16 @@
+name: Build Web Service
+description: Builds web image and, if configured, pushes to Docker Hub
+
+inputs:
+  DOCKER_UPLOAD:
+    description: "Should image be uploaded to Docker Hub?"
+    required: true
+    default: "true"
+
+runs:
+  using: composite
+  steps:
+    - name: Build and, possibly, push web image
+      shell: bash
+      id: build-image
+      run: bun run .github/scripts/src/build-image  --dockerUpload "${{ inputs.DOCKER_UPLOAD }}"

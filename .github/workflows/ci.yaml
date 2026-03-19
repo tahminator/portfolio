@@ -1,0 +1,114 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/SchemaStore/schemastore/refs/heads/master/src/schemas/json/github-workflow.json
+name: CI
+run-name: Running continuous integration on ${{ github.actor }}'s commits
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  group: ci-cd-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup pipeline
+        uses: ./.github/composite/setup
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install Dependencies
+        run: pnpm install -r --frozen-lockfile
+
+      - name: Run Tests
+        run: pnpm run test
+
+  buildTestImage:
+    name: Build Docker image and deploy to Docker Hub
+    runs-on: ubuntu-latest
+    needs: [test]
+
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Setup pipeline
+        uses: ./.github/composite/setup
+        with:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Build test image
+        uses: ./.github/composite/build-image
+        id: build
+        with:
+          DOCKER_UPLOAD: false
+
+  buildImage:
+    name: Build Docker image and deploy to Docker Hub
+    runs-on: ubuntu-latest
+    needs: [test]
+
+    if: github.ref_name == 'main'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Setup pipeline
+        uses: ./.github/composite/setup
+        with:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Build image
+        uses: ./.github/composite/build-image
+        id: build
+
+  createTag:
+    name: Create new tag
+    runs-on: ubuntu-latest
+    needs: [buildImage]
+
+    if: github.ref_name == 'main'
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup pipeline
+        uses: ./.github/composite/setup
+        with:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Create new tag
+        uses: ./.github/composite/create-tag
