@@ -1,4 +1,8 @@
-import { DockerClient, Utils } from "@tahminator/pipeline";
+import {
+  DockerClient,
+  EnvClient,
+  EnvClientStrategy,
+} from "@tahminator/pipeline";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 
@@ -15,7 +19,8 @@ const { originalTag, newGithubTag } = await yargs(hideBin(process.argv))
   .parse();
 
 export async function main() {
-  const ciEnv = await Utils.getEnvVariables(["ci"]);
+  const envClient = EnvClient.create(EnvClientStrategy.GIT_CRYPT);
+  const ciEnv = await envClient.readFromEnv(".env.ci");
   const { dockerHubPat } = parseCiEnv(ciEnv);
   await using dockerClient = await DockerClient.create(
     "tahminator",

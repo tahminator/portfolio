@@ -1,4 +1,8 @@
-import { DockerClient, Utils } from "@tahminator/pipeline";
+import {
+  DockerClient,
+  EnvClient,
+  EnvClientStrategy,
+} from "@tahminator/pipeline";
 import { $ } from "bun";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
@@ -15,7 +19,8 @@ const { dockerUpload } = await yargs(hideBin(process.argv))
   .parse();
 
 async function main() {
-  const ciEnv = await Utils.getEnvVariables(["ci"]);
+  const envClient = EnvClient.create(EnvClientStrategy.GIT_CRYPT);
+  const ciEnv = await envClient.readFromEnv(".env.ci");
   const { dockerHubPat } = parseCiEnv(ciEnv);
 
   await using dockerClient = await DockerClient.create(
@@ -41,7 +46,6 @@ async function main() {
 
   await dockerClient.buildImage({
     dockerFileLocation: "Dockerfile",
-    dockerUsername: "tahminator",
     dockerRepository: "portfolio",
     tags: [timestamp, gitSha],
     shouldUpload: dockerUpload,
