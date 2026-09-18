@@ -10,7 +10,14 @@ import { P } from "@/components/Motion/P";
 import Experience from "@/app/_components/Experience";
 import Project from "@/app/_components/Projects";
 
-export default function Home() {
+export default function Home({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const initialOpenProjectName = Array.isArray(searchParams.project)
+    ? searchParams.project[0]
+    : searchParams.project;
   return (
     <>
       <AnimatedBeam>
@@ -71,7 +78,7 @@ export default function Home() {
           </div>
         </div>
         <Experience />
-        <Project />
+        <Project initialOpenProjectName={initialOpenProjectName} />
       </AnimatedBeam>
     </>
   );
