@@ -19,6 +19,12 @@ const experiences: Experience[] = [
     dates: "Jun. 2026 – Aug. 2026",
   },
   {
+    role: "Lead Platform Engineer (Volunteer)",
+    company: "Patina Network",
+    location: "New York, NY",
+    dates: "May. 2026 – Present",
+  },
+  {
     role: "Software Engineer Intern/Co-op (Fall, Spring)",
     company: "Integral Ad Science",
     location: "New York, NY",
@@ -34,7 +40,7 @@ const experiences: Experience[] = [
     role: "Lead Software Engineer (Volunteer)",
     company: "Patina Network",
     location: "New York, NY",
-    dates: "Jan. 2025 – Present",
+    dates: "Jan. 2025 – Jan. 2026",
   },
   {
     role: "Jr. Software Engineer",
