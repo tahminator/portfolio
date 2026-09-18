@@ -84,10 +84,10 @@ const projects: Project[] = [
     description: (
       <>
         <p className="text-left">
-          Over winter break, I got the chance to lead a small team and create a
-          project for Patina Network. We decided to make something that would
-          help us stay motivated while we grind our technical skills during our
-          internship search!
+          Over winter break 2024, I got the chance to lead a small team and
+          create a project for Patina Network. We decided to make something that
+          would help us stay motivated while we grind our technical skills
+          during our internship search!
         </p>
         <p className="text-left">
           Codebloom is a website that "game-ifies" LeetCode by giving you points
@@ -771,8 +771,16 @@ const projects: Project[] = [
   },
 ];
 
-export default function Project() {
-  const [selected, setSelected] = useState<Project | null>(null);
+export default function Project({
+  initialOpenProjectName,
+}: {
+  initialOpenProjectName?: string;
+}) {
+  const [selected, setSelected] = useState<Project | null>(() =>
+    projects.find(
+      (project) => project.name.toLowerCase() === initialOpenProjectName?.toLowerCase(),
+    ) ?? null,
+  );
   const cardVideoRefs = useRef<Record<string, HTMLVideoElement | null>>({});
   const modalStartTime = useRef(0);
 
