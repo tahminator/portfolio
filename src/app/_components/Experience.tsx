@@ -7,19 +7,25 @@ type Experience = {
 };
 const experiences: Experience[] = [
   {
+    role: "Software Engineer Intern/Co-op (Fall)",
+    company: "Integral Ad Science",
+    location: "New York, NY",
+    dates: "Sep. 2025 – Present",
+  },
+  {
     role: "Software Engineer Intern",
     company: "Capital One",
     location: "McLean, VA",
     dates: "Jun. 2026 – Aug. 2026",
   },
   {
-    role: "Software Engineer Intern (Fall, Spring)",
+    role: "Software Engineer Intern/Co-op (Fall, Spring)",
     company: "Integral Ad Science",
     location: "New York, NY",
     dates: "Sep. 2025 – May. 2026",
   },
   {
-    role: "Software Engineer Intern (Summer)",
+    role: "Software Engineer Intern/Co-op (Summer)",
     company: "Integral Ad Science",
     location: "New York, NY",
     dates: "Jun. 2025 – Aug. 2025",
